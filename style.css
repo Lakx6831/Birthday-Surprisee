@@ -1,0 +1,113 @@
+/* General body styling */
+body {
+    margin: 0;
+    font-family: "Bookman Old Style", cursive;
+    overflow: hidden;
+}
+
+/* Initial Page Styling */
+#initial-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #87CEEB; /* Light blue background */
+    flex-direction: column;
+}
+
+#initial-page h1 {
+    font-size: 28px;
+    color: yellow;
+    text-align: center;
+}
+
+#initial-page button {
+    padding: 10px 20px;
+    font-size: 1.5em;
+    background-color: #FFD700; /* Gold button */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+#initial-page button:hover {
+    transform: scale(1.1);
+    background-color: #FFA500; /* Darker gold on hover */
+}
+
+/* Scroll Page Styling */
+#scroll-page {
+    display: none;
+    height: 100vh;
+    background: url('https://i.imgur.com/2C1OxH2.jpg') no-repeat center center; /* Papyrus texture */
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+}
+
+.scroll-content {
+    text-align: center;
+    padding: 20px;
+    margin: auto;
+}
+
+.scroll-content h2 {
+    font-size: 1.8em;
+    color: #4b2e2e;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.scroll-content img {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#cut-cake {
+    padding: 10px 20px;
+    background-color: #eac071;
+    border: none;
+    font-size: 1.2em;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Decorations - Confetti and Balloons */
+#confetti-container div,
+#balloon-container div {
+    position: absolute;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(-150%);
+    }
+}
+
+.confetti {
+    width: 10px;
+    height: 10px;
+    background-color: gold;
+    border-radius: 50%;
+}
+
+.balloon {
+    width: 50px;
+    height: 70px;
+    background: linear-gradient(to bottom, #FF69B4, #FFD700);
+    border-radius: 50%;
+    border: 2px solid #FF69B4;
+}
