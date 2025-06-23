@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            font-family: "Bookman Old Style", cursive;
+            overflow: hidden;
+            background: linear-gradient(135deg, #87CEFA, #130a7f); /* Cool ombre */
+        }
+
+        /* Initial Page Styling */
+        #initial-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        #initial-page h1 {
+            font-size: 3em;
+            color: #FFD700; /* Gold */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+        }
+
+        #initial-page button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            background-color: #FFD700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #initial-page button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Scroll and Cake Page Styling */
+        #scroll-page, #cake-page {
+            display: none;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .scroll-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            z-index: 10; /* Ensure content is above animations */
+        }
+
+        .scroll-content img {
+            width: 70%;
+            max-width: 800px;
+            margin: auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Balloons Styling */
+        .balloon {
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(circle, #87CEEB 50%, #4682B4 80%);
+            border-radius: 50%;
+            position: absolute;
+            z-index: 1; /* Behind cake */
+            animation: fall 6s linear infinite;
+        }
+
+        .balloon::after {
+            content: "";
+            width: 2px;
+            height: 30px;
+            background: white;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+        }
+
+        /* Confetti Styling */
+        #confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1; /* Behind cake */
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #FFD700;
+            animation: fallConfetti 3s linear infinite;
+            border-radius: 50%;
+        }
+
+        @keyframes fallConfetti {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+
+        /* Ribbon Confetti Styling */
+        .ribbon-confetti {
+            width: 10px; /* Smaller ribbons */
+            height: 30px;
+            background: linear-gradient(to bottom, #87CEEB, #1e38ff); /* Blue colors */
+            position: absolute;
+            z-index: 1; /* Behind cake */
+            animation: ribbonFall 4s linear infinite;
+            transform: rotate(45deg);
+            border-radius: 5px;
+        }
+
+        @keyframes ribbonFall {
+            0% {
+                transform: translateY(-100vh) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+
+        /* Picture Frame Styling */
+        .picture-frame {
+            width: 60px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            z-index: 1; /* Behind cake */
+            animation: fallFrames 6s linear infinite;
+        }
+
+        @keyframes fallFrames {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+        }
+
+        /* Glowing Button */
+        #cut-cake {
+            position: absolute;
+            top: 75%;
+            right: 10%; /* Positioned to the side */
+            padding: 15px 30px;
+            font-size: 1.5em;
+            background-color: #FFD700; /* Chrome Yellow */
+            border: none;
+            border-radius: 10px;
+            color: rgb(255, 251, 251);
+            cursor: pointer;
+            box-shadow: 0 0 15px #FFDA33, 0 0 30px #FFD700;
+            animation: glow 1.5s infinite alternate;
+            transform: translateY(-50%);
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 15px #FFDA33, 0 0 30px #FFD700;
+            }
+            to {
+                box-shadow: 0 0 30px #FFD700, 0 0 45px #FFDA33;
+            }
+        }
+
+        #cut-cake:hover {
+            transform: scale(1.1);
+            background-color: #FFC300;
+        }
+    </style>
+</head>
+<body>
+    <!-- Initial Page -->
+    <div id="initial-page">
+        <h1>Happy Birthday, my love!</h1>
+        <button id="open-scroll">Open Me</button>
+    </div>
+
+    <!-- Scroll Page -->
+    <div id="scroll-page">
+        <div id="confetti"></div>
+        <div class="scroll-content">
+            <img src="zphoto5.jpg.png" alt="Birthday Cake">
+            <button id="cut-cake">Cut Your Cake!</button>
+        </div>
+    </div>
+
+    <!-- Cake Page -->
+    <div id="cake-page">
+        <div id="confetti"></div>
+        <div class="scroll-content">
+            <img src="zphoto6.jpg.png" alt="Cut Cake">
+        </div>
+    </div>
+
+    <script>
+        const openMeButton = document.getElementById("open-scroll");
+        const initialPage = document.getElementById("initial-page");
+        const scrollPage = document.getElementById("scroll-page");
+        const cakePage = document.getElementById("cake-page");
+        const confetti = document.getElementById("confetti");
+
+        openMeButton.addEventListener("click", () => {
+            initialPage.style.display = "none";
+            scrollPage.style.display = "flex";
+            startConfetti();
+            startBalloons();
+        });
+
+        document.getElementById("cut-cake").addEventListener("click", () => {
+            scrollPage.style.display = "none";
+            cakePage.style.display = "flex";
+            startConfetti();
+            startBalloons();
+            startPictureFrames();
+            startRibbonConfetti();
+        });
+
+        function startConfetti() {
+            for (let i = 0; i < 200; i++) {
+                const piece = document.createElement("div");
+                piece.className = "confetti-piece";
+                piece.style.left = Math.random() * 100 + "%";
+                piece.style.backgroundColor = ["#FF4500", "#FFD700", "#00FF00", "#1E90FF"][Math.floor(Math.random() * 4)];
+                piece.style.animationDuration = Math.random() * 2 + 2 + "s";
+                confetti.appendChild(piece);
+            }
+        }
+
+        function startBalloons() {
+            for (let i = 0; i < 10; i++) {
+                const balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.left = Math.random() * 100 + "%";
+                balloon.style.animationDelay = Math.random() * 3 + "s";
+                document.body.appendChild(balloon);
+            }
+        }
+
+        function startPictureFrames() {
+            const frameImages = ["zphoto1.jpg", "zphoto2.jpg", "zphoto3.jpg", "zphoto4.jpg"];
+            for (let i = 0; i < frameImages.length; i++) {
+                for (let j = 0; j < 3; j++) {
+                    const frame = document.createElement("div");
+                    frame.className = "picture-frame";
+                    frame.style.left = Math.random() * 90 + "%";
+                    frame.style.animationDelay = (Math.random() * 2 + 1) + "s";
+                    frame.style.backgroundImage = `url(${frameImages[i]})`;
+                    document.body.appendChild(frame);
+                }
+            }
+        }
+
+        function startRibbonConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const ribbon = document.createElement("div");
+                ribbon.className = "ribbon-confetti";
+                ribbon.style.left = Math.random() * 100 + "%";
+                ribbon.style.animationDelay = Math.random() * 3 + "s";
+                document.body.appendChild(ribbon);
+            }
+        }
+    </script>
+</body>
+</html>
